@@ -15,7 +15,7 @@ export const getStaticProps = async () => {
     props: {
       recipes: response.items,
     },
-    revalidate: 1, //seconds
+    revalidate: 1, //seconds, regenerate an existing pages
   };
 };
 

@@ -1,6 +1,7 @@
 import { createClient } from "contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
+import Skeleton from "../../components/Skeleton";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -20,7 +21,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true, // if set to true, there is no 404 page, but Next.js tries to fetch the newest content
   };
 };
 
@@ -32,11 +33,16 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: { recipe: items[0] },
-    revalidate: 1, //seconds
+    revalidate: 1, //seconds, regenerate an existing pages
   };
 };
 
 export default function RecipeDetails({ recipe }) {
+  if (!recipe) {
+    // content to display as fallback
+    return <Skeleton />;
+  }
+
   const { featuredImage, title, cookingTime, ingredients, method } =
     recipe.fields;
 
