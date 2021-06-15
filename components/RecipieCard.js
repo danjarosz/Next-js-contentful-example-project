@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const RecipieCard = ({ recipe }) => {
-  const { title, slug, cookingTIme, thumbnail } = recipe.fields;
+  const { title, slug, cookingTime, thumbnail } = recipe.fields;
 
   return (
     <div className="card">
@@ -16,7 +16,7 @@ const RecipieCard = ({ recipe }) => {
       <div className="content">
         <div className="info">
           <h4>{title}</h4>
-          <p>Takes approx {cookingTIme} mins to make</p>
+          <p>Takes approx {cookingTime} mins to make</p>
         </div>
         <div className="actions">
           <Link href={`/recipes/${slug}`}>
